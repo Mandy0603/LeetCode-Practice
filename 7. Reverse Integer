@@ -1,0 +1,41 @@
+/**Given a 32-bit signed integer, reverse digits of an integer.*/
+
+public class ReverseInteger {
+        public static int reverse(int x) {
+        Integer n = x;
+        String ori = n.toString();
+
+        int start = 0;
+        if (ori.charAt(0) == '-' && ori.length() > 1) {
+            start = 1;
+        }
+        int end = ori.length() - 1;
+
+
+        while (start < end) {
+            ori=swap(ori, start, end);
+            start++;
+            end--;
+
+        }
+
+        try {
+            return Integer.parseInt(ori);
+        }catch (Exception e){
+            return 0;
+        }
+    }
+
+    public static String swap(String ori, int start, int end) {
+
+        char[] arr = ori.toCharArray();
+
+        char temp = arr[start];
+        arr[start] = arr[end];
+        arr[end] = temp;
+        ori=new String(arr);
+        
+        return ori;
+
+    }
+}
