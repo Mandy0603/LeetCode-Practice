@@ -1,0 +1,65 @@
+public class StringToInteger_8 {
+    public static int myAtoi(String str) {
+        if (str == null) {
+            return 0;
+        }
+
+        str = str.trim();
+        if (str.length() == 0)
+            return 0;
+
+
+        String[] strArray = str.split(" +");
+        str = strArray[0];
+
+
+        int start = 0;
+        if (str.charAt(0) == '-' || str.charAt(0) == '+')
+            start = 1;
+
+
+        String regex = "\\d+(\\.\\d+)?";
+
+        if (str.substring(start).matches(regex)) {
+            try {
+                String[] strArray2=str.split("\\.");
+                str=strArray2[0];
+                return Integer.parseInt(str);
+            } catch (Exception e) {
+                if(str.charAt(0)=='-')
+                return -2147483648;
+                else
+                    return 2147483647;
+
+            }
+        }
+        else if(str.length()>1&&Character.isDigit(str.charAt(start))){
+            str=trimToInteger(str,start);
+            try{ return Integer.parseInt(str);}
+            catch (Exception e) {
+                if(str.charAt(0)=='-')
+                    return -2147483648;
+                else
+                    return 2147483647;
+
+            }
+        }
+        else return 0;
+
+
+
+
+    }
+
+    public static String trimToInteger(String str,int start) {
+        int pos=start;
+        for (int i = start; i <str.length() ; i++) {
+            if(Character.isDigit(str.charAt(i)))
+                pos++;
+            else
+                break;
+
+        }
+        return str.substring(0,pos);
+    }
+}
