@@ -1,0 +1,46 @@
+/**
+ * Given a sorted array nums,
+ * remove the duplicates in-place such that duplicates appeared
+ * at most twice and return the new length.
+ * 
+ * Do not allocate extra space for another array,
+ * you must do this by modifying the input array in-place with O(1) extra memory.
+ */
+
+
+import java.util.Arrays;
+
+public class RemoveDuplicatesFromSortedArrayII {
+    public static int removeDuplicates(int[] nums) {
+        if (nums.length <= 2) {
+            return nums.length;
+        }
+
+        for (int i = 0; i < nums.length - 2; i++) {
+            if (nums[i] == Integer.MAX_VALUE) {
+                continue;
+            }
+            if (nums[i] == nums[i + 1]) {
+                for (int j = i + 2; j < nums.length; j++) {
+                    if (nums[j] == nums[i]) {
+                        nums[j] = Integer.MAX_VALUE;
+                    } else {
+                        break;
+                    }
+                }
+            }
+        }
+
+        Arrays.sort(nums);
+
+        int pos = 0;
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] != Integer.MAX_VALUE) {
+                pos++;
+            } else {
+                break;
+            }
+        }
+        return pos;
+    }
+}
